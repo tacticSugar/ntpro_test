@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import '../Traiding/Tradins.scss'
 
 export default function Archive({ archiveList }) {
   return (

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import './Modal.scss'
 
 export const Modal = ({ isOpen, setIsOpen, children }) => {
   return (

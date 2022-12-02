@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import './Price.scss'
 
 export default function Price({ type, price, setOrderValues, setIsOpen }) {
   const clickToPrice = () => {

@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react'
+
+import './Traiding.scss'
+
 import Clock from '../Clock/Clock'
 import { Modal } from '../Modal/Modal'
 import Price from '../Price/Price'
@@ -15,7 +18,7 @@ export default function Traiding({
   const [orderValues, setOrderValues] = useState({ type: '', price: '' })
   const [volume, setVolume] = useState('')
   return (
-    <div>
+    <div className="trading">
       <Clock />
       <Select
         options={options}
