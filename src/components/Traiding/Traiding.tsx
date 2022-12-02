@@ -4,7 +4,7 @@ import './Traiding.scss'
 
 import Clock from '../Clock/Clock'
 import { Modal } from '../Modal/Modal'
-import Price from '../Price/Price'
+import Price, { OrderValues } from '../Price/Price'
 import Select from '../Select/Select'
 import Input from '../Input/Input'
 import { configuration } from '../../configuration'
@@ -33,7 +33,7 @@ export default function Traiding(props: TraidingProps) {
   const [price, setPrice] = useState(randomIntFromInterval(min, max).toFixed(4))
   const [volume, setVolume] = useState('')
   const [isOpen, setIsOpen] = useState(false)
-  const [orderValues, setOrderValues] = useState({ type: '', price: '' })
+  const [orderValues, setOrderValues] = useState<OrderValues>()
 
   function randomIntFromInterval(min: number, max: number) {
     return Math.random() * (max - min + 1) + min
@@ -47,8 +47,10 @@ export default function Traiding(props: TraidingProps) {
     return () => clearInterval(interval)
   }, [activePair])
 
-  function calculateSpread() {
-    return (parseFloat(price) - configuration[activePair].spread).toFixed(4)
+  function calculateSpread(): number {
+    return parseFloat(
+      (parseFloat(price) - configuration[activePair].spread).toFixed(4)
+    )
   }
 
   function handleActivePair(activePair: keyof typeof configuration) {
@@ -58,12 +60,13 @@ export default function Traiding(props: TraidingProps) {
   }
 
   function handleClickSubmitVolume() {
+    if (!orderValues) return
     addNewOrder({
       side: orderValues.type,
       price: orderValues.price,
       instrument: activePair,
-      volume,
-      time: Date.now(),
+      volume: parseFloat(volume),
+      time: new Date(),
     })
     setIsOpen(false)
     setVolume('')
@@ -80,7 +83,7 @@ export default function Traiding(props: TraidingProps) {
       <div className="prices">
         <Price
           type="buy"
-          price={price}
+          price={parseFloat(price)}
           setOrderValues={setOrderValues}
           setIsOpen={setIsOpen}
         />
@@ -92,15 +95,19 @@ export default function Traiding(props: TraidingProps) {
         />
       </div>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-        <b className={orderValues.type === 'buy' ? 'green' : 'red'}>
-          {orderValues.type} {orderValues.price}
-        </b>
-        <b>{activePair}</b>
-        <Input value={volume} onChange={setVolume} />
-        <div className="modal__buttons">
-          <button onClick={() => setIsOpen(false)}>Cancel</button>{' '}
-          <button onClick={handleClickSubmitVolume}>OK</button>
-        </div>
+        {orderValues && (
+          <>
+            <b className={orderValues.type === 'buy' ? 'green' : 'red'}>
+              {orderValues.type} {orderValues.price}
+            </b>
+            <b>{activePair}</b>
+            <Input value={volume} onChange={setVolume} />
+            <div className="modal__buttons">
+              <button onClick={() => setIsOpen(false)}>Cancel</button>{' '}
+              <button onClick={handleClickSubmitVolume}>OK</button>
+            </div>
+          </>
+        )}
       </Modal>
     </div>
   )

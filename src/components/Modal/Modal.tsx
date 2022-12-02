@@ -1,7 +1,12 @@
-import { useEffect, useState } from 'react'
 import './Modal.scss'
 
-export const Modal = ({ isOpen, setIsOpen, children }) => {
+type ModalProps = {
+  isOpen: boolean
+  setIsOpen: (value: boolean) => void
+  children: React.ReactNode
+}
+
+export const Modal = ({ isOpen, setIsOpen, children }: ModalProps) => {
   return (
     <div
       className={isOpen ? 'modal active' : 'modal'}

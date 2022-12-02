@@ -1,8 +1,12 @@
 import dayjs from 'dayjs'
-// import '..//Traiding/Traiding.scss'
+import { Order } from '../Traiding/Traiding'
 import './Archive.scss'
 
-export default function Archive({ archiveList }) {
+type ArchiveProps = {
+  archiveList: Order[]
+}
+
+export default function Archive({ archiveList }: ArchiveProps) {
   return (
     <table className="table">
       <tr>
@@ -13,8 +17,8 @@ export default function Archive({ archiveList }) {
         <th>Timestamp</th>
       </tr>
       <tbody>
-        {archiveList.map((el) => (
-          <tr>
+        {archiveList.reverse().map((el) => (
+          <tr key={el.time.toISOString()}>
             <td className={el.side === 'buy' ? 'green' : 'red'}>
               {el.side.toString().toUpperCase()}
             </td>

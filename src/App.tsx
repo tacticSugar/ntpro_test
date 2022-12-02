@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react'
-import Traiding from './components/Traiding/Traiding'
+import { useState } from 'react'
+import Traiding, { Order } from './components/Traiding/Traiding'
 import Archive from './components/Archive/Archive'
 
 import './App.scss'
-import { configuration } from './configuration'
-import { Modal } from './components/Modal/Modal'
 
 export default function App() {
   const [activeContent, setActiveContent] = useState('traiding')
-  const [archiveList, setArchiveList] = useState([])
+  const [archiveList, setArchiveList] = useState<Order[]>([])
 
-  function addNewOrder() {}
+  function addNewOrder(order: Order) {
+    setArchiveList([...archiveList, order])
+  }
 
   return (
     <div className="app">
@@ -21,7 +21,7 @@ export default function App() {
         </div>
         <hr />
         {activeContent === 'traiding' ? (
-          <Traiding setArchiveList={setArchiveList} />
+          <Traiding addNewOrder={addNewOrder} />
         ) : (
           <Archive archiveList={archiveList} />
         )}
