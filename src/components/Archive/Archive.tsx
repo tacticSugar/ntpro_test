@@ -6,7 +6,7 @@ export default function Archive({ archiveList }) {
   return (
     <table className="table">
       <tr>
-        <th>Side</th>
+        <th>Order</th>
         <th>Price</th>
         <th>Instrument</th>
         <th>Volume</th>
@@ -15,11 +15,13 @@ export default function Archive({ archiveList }) {
       <tbody>
         {archiveList.map((el) => (
           <tr>
-            <td className={el.side === 'buy' ? 'green' : 'red'}>{el.side}</td>
+            <td className={el.side === 'buy' ? 'green' : 'red'}>
+              {el.side.toString().toUpperCase()}
+            </td>
             <td>{el.price}</td>
             <td>{el.instrument}</td>
             <td>{el.volume}</td>
-            <td>{dayjs(el.time).format('YYYY.M.D H:mm:s.sss')}</td>
+            <td>{dayjs(el.time).format('YYYY.MM.DD H:mm:s.sss')}</td>
           </tr>
         ))}
       </tbody>
