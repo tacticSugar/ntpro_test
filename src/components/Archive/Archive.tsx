@@ -10,7 +10,7 @@ export default function Archive({ archiveList }: ArchiveProps) {
   return (
     <table className="table">
       <tr>
-        <th>Order</th>
+        <th>Side</th>
         <th>Price</th>
         <th>Instrument</th>
         <th>Volume</th>

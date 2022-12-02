@@ -18,14 +18,14 @@ export default function Price({
   setOrderValues,
   setIsOpen,
 }: PriceProps) {
-  const clickToPrice = () => {
+  const handleClickToPrice = () => {
     setOrderValues({ type, price })
     setIsOpen(true)
   }
   return (
     <div
-      className={`${type === 'buy' ? 'green' : 'red'}`}
-      onClick={clickToPrice}
+      className={type === 'buy' ? 'green' : 'red'}
+      onClick={handleClickToPrice}
     >
       <b>{type.toUpperCase()}</b>
       <h3>{price}</h3>

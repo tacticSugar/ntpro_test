@@ -1,5 +1,6 @@
 import React from 'react'
 import { configuration } from '../../configuration'
+import './Select.scss'
 
 type SelectProps = {
   options: Array<keyof typeof configuration>

@@ -8,6 +8,7 @@ import Price, { OrderValues } from '../Price/Price'
 import Select from '../Select/Select'
 import Input from '../Input/Input'
 import { configuration } from '../../configuration'
+import { randomFromInterval } from '../../helpers/randomNum'
 
 export type Order = {
   side: 'buy' | 'sell'
@@ -29,37 +30,34 @@ export default function Traiding(props: TraidingProps) {
   const [activePair, setActivePair] = useState(options[0])
 
   const { min, max } = configuration[activePair]
+  const [price, setPrice] = useState(randomFromInterval(min, max).toFixed(4))
 
-  const [price, setPrice] = useState(randomIntFromInterval(min, max).toFixed(4))
   const [volume, setVolume] = useState('')
   const [isOpen, setIsOpen] = useState(false)
   const [orderValues, setOrderValues] = useState<OrderValues>()
 
-  function randomIntFromInterval(min: number, max: number) {
-    return Math.random() * (max - min + 1) + min
-  }
-
   useEffect(() => {
     const { min, max } = configuration[activePair]
     const interval = setInterval(() => {
-      setPrice(randomIntFromInterval(min, max).toFixed(4))
-    }, 3000)
+      setPrice(randomFromInterval(min, max).toFixed(4))
+    }, 700)
     return () => clearInterval(interval)
   }, [activePair])
 
   function calculateSpread(): number {
-    return parseFloat(
-      (parseFloat(price) - configuration[activePair].spread).toFixed(4)
+    return (
+      parseFloat(price) -
+      parseFloat(configuration[activePair].spread.toFixed(4))
     )
   }
 
   function handleActivePair(activePair: keyof typeof configuration) {
     const { min, max } = configuration[activePair]
     setActivePair(activePair)
-    setPrice(randomIntFromInterval(min, max).toFixed(4))
+    setPrice(randomFromInterval(min, max).toFixed(4))
   }
 
-  function handleClickSubmitVolume() {
+  function handleSubmitOrder() {
     if (!orderValues) return
     addNewOrder({
       side: orderValues.type,
@@ -104,7 +102,7 @@ export default function Traiding(props: TraidingProps) {
             <Input value={volume} onChange={setVolume} />
             <div className="modal__buttons">
               <button onClick={() => setIsOpen(false)}>Cancel</button>{' '}
-              <button onClick={handleClickSubmitVolume}>OK</button>
+              <button onClick={handleSubmitOrder}>OK</button>
             </div>
           </>
         )}
