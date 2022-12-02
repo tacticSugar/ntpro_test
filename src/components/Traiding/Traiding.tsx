@@ -45,19 +45,19 @@ export default function Traiding(props: TraidingProps) {
   }, [activePair])
 
   function calculateSpread(): number {
-    const r = (+price)
+    const fixPrice = (+price)
       .toFixed(4)
       .replace(/([0-9]+(\.[0-9]+[1-9])?)(\.?0+$)/, '$1')
 
-    const b = configuration[activePair].spread
+    const fixSpread = configuration[activePair].spread
       .toFixed(4)
       .replace(/([0-9]+(\.[0-9]+[1-9])?)(\.?0+$)/, '$1')
 
-    const a = (parseFloat(r) - parseFloat(b))
+    const fixRes = (parseFloat(fixPrice) - parseFloat(fixSpread))
       .toFixed(4)
       .replace(/([0-9]+(\.[0-9]+[1-9])?)(\.?0+$)/, '$1')
 
-    return parseFloat(a)
+    return parseFloat(fixRes)
   }
 
   function handleActivePair(activePair: keyof typeof configuration) {
