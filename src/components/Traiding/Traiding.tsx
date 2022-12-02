@@ -41,10 +41,9 @@ export default function Traiding({
       </div>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
         <b className={orderValues.type === 'buy' ? 'green' : 'red'}>
-          {orderValues.type}
-        </b>{' '}
-        <b>{orderValues.price}</b>
-        {activePair}
+          {orderValues.type} {orderValues.price}
+        </b>
+        <b>{activePair}</b>
         <div>
           <label htmlFor="volume">Volume</label>
           <input
@@ -53,27 +52,27 @@ export default function Traiding({
             onChange={(e) => setVolume(e.target.value)}
           />
         </div>
-        <br />
-        <br />
-        <button onClick={() => setIsOpen(false)}>Cancel</button>{' '}
-        <button
-          onClick={() => {
-            setArchiveList((prev) => [
-              ...prev,
-              {
-                side: orderValues.type,
-                price: orderValues.price,
-                instrument: activePair,
-                volume,
-                time: Date.now(),
-              },
-            ])
-            setIsOpen(false)
-            setVolume('')
-          }}
-        >
-          OK
-        </button>
+        <div className="modal__buttons">
+          <button onClick={() => setIsOpen(false)}>Cancel</button>{' '}
+          <button
+            onClick={() => {
+              setArchiveList((prev) => [
+                ...prev,
+                {
+                  side: orderValues.type,
+                  price: orderValues.price,
+                  instrument: activePair,
+                  volume,
+                  time: Date.now(),
+                },
+              ])
+              setIsOpen(false)
+              setVolume('')
+            }}
+          >
+            OK
+          </button>
+        </div>
       </Modal>
     </div>
   )
