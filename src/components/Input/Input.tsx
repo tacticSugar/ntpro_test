@@ -8,7 +8,9 @@ type InputProps = {
 
 export default function Input(props: InputProps) {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    props.onChange(e.target.value.replace(/[\D]/, ''))
+    const value = e.target.value.replace(/[\D]/, '')
+    if (isNaN(parseFloat(value))) return
+    props.onChange(value)
   }
 
   return (
