@@ -18,4 +18,8 @@
   & tbody tr:nth-child(even) {
     background: #f7f7f7;
   }
+
+  @media (max-width: 430px) {
+    font-size: 0.5rem;
+  }
 }
