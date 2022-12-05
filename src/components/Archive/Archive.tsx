@@ -9,13 +9,16 @@ type ArchiveProps = {
 export default function Archive({ archiveList }: ArchiveProps) {
   return (
     <table className="table">
-      <tr>
-        <th>Side</th>
-        <th>Price</th>
-        <th>Instrument</th>
-        <th>Volume</th>
-        <th>Timestamp</th>
-      </tr>
+      <thead>
+        <tr>
+          <th>Side</th>
+          <th>Price</th>
+          <th>Instrument</th>
+          <th>Volume</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+
       <tbody>
         {archiveList.reverse().map((el) => (
           <tr key={el.time.toISOString()}>

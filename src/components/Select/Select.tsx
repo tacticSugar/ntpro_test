@@ -1,4 +1,6 @@
 import React from 'react'
+import { v4 as uuidv4 } from 'uuid'
+
 import { configuration } from '../../configuration'
 import './Select.scss'
 
@@ -20,7 +22,9 @@ export default function Select({
   return (
     <select onChange={handleOnChange} value={activePair}>
       {options.map((option) => (
-        <option value={option}>{option}</option>
+        <option key={uuidv4()} value={option}>
+          {option}
+        </option>
       ))}
     </select>
   )
