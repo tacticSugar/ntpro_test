@@ -9,6 +9,9 @@ import Select from '../Select/Select'
 import Input from '../Input/Input'
 import { configuration } from '../../configuration'
 import { randomFromInterval } from '../../helpers/randomNum'
+import { addOrder } from '../../redux/archiveSlice'
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 export type Order = {
   side: 'buy' | 'sell'
@@ -18,14 +21,10 @@ export type Order = {
   time: Date
 }
 
-type TraidingProps = {
-  addNewOrder: (order: Order) => void
-}
-
 const options = Object.keys(configuration) as Array<keyof typeof configuration>
 
-export default function Traiding(props: TraidingProps) {
-  const { addNewOrder } = props
+export default function Traiding() {
+  const dispatch = useDispatch()
 
   const [activePair, setActivePair] = useState(options[0])
 
@@ -68,13 +67,15 @@ export default function Traiding(props: TraidingProps) {
 
   function handleSubmitOrder() {
     if (!orderValues) return
-    addNewOrder({
-      side: orderValues.type,
-      price: orderValues.price,
-      instrument: activePair,
-      volume: parseFloat(volume),
-      time: new Date(),
-    })
+    dispatch(
+      addOrder({
+        side: orderValues.type,
+        price: orderValues.price,
+        instrument: activePair,
+        volume: parseFloat(volume),
+        time: new Date(),
+      })
+    )
     setIsOpen(false)
     setVolume('')
   }

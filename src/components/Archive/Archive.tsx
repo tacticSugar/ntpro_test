@@ -1,12 +1,11 @@
 import dayjs from 'dayjs'
+import { useAppSelector } from '../../redux/store'
 import { Order } from '../Traiding/Traiding'
 import './Archive.scss'
 
-type ArchiveProps = {
-  archiveList: Order[]
-}
+export default function Archive() {
+  const orderList = useAppSelector((state) => state.archive.orderList)
 
-export default function Archive({ archiveList }: ArchiveProps) {
   return (
     <table className="table">
       <thead>
@@ -20,7 +19,7 @@ export default function Archive({ archiveList }: ArchiveProps) {
       </thead>
 
       <tbody>
-        {[...archiveList].reverse().map((el) => (
+        {orderList.map((el) => (
           <tr key={el.time.toISOString()}>
             <td className={el.side === 'buy' ? 'green' : 'red'}>
               {el.side.toString().toUpperCase()}

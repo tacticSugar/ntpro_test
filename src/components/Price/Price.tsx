@@ -22,6 +22,7 @@ export default function Price({
     setOrderValues({ type, price })
     setIsOpen(true)
   }
+
   return (
     <div
       className={type === 'buy' ? 'green' : 'red'}
