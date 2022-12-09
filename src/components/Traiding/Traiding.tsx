@@ -81,7 +81,15 @@ export default function Traiding() {
   }
 
   return (
-    <div className="trading">
+    <div className="trading-container">
+      <div className="buttons">
+        <Link className="link" to={'/'}>
+          TRAIDING
+        </Link>
+        <Link className="link" to={'/archive'}>
+          ARCHIVE
+        </Link>
+      </div>
       <Clock />
       <Select
         options={options}

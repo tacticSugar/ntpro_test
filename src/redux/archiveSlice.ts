@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Order } from '../components/Traiding/Traiding'
+import { setToLS } from '../helpers/sessionStorageHelper'
 
 interface ArchiveState {
   orderList: Order[]
@@ -13,6 +14,7 @@ const archiveSlice = createSlice({
   reducers: {
     addOrder(state, action) {
       state.orderList.unshift(action.payload)
+      setToLS('order', action.payload)
     },
   },
 })
