@@ -13,8 +13,8 @@ const archiveSlice = createSlice({
   initialState,
   reducers: {
     addOrder(state, action) {
+      // setToLS('order', action.payload) //save to LS
       state.orderList.unshift(action.payload)
-      setToLS('order', action.payload)
     },
   },
 })

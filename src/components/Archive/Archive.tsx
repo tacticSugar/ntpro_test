@@ -6,9 +6,9 @@ import { Order } from '../Traiding/Traiding'
 import './Archive.scss'
 
 export default function Archive() {
-  const orders: Order[] = getFromLS('order') ?? []
+  // const orders: Order[] = getFromLS('order') ?? [] // get from LS
   const orderList = useAppSelector((state) => {
-    return state.archive.orderList.length > 0 ? state.archive.orderList : orders
+    return state.archive.orderList.length > 0 ? state.archive.orderList : []
   })
 
   return (

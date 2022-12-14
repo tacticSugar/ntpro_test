@@ -9,9 +9,5 @@ export default function Clock() {
     }, 1000)
     return () => clearInterval(interval)
   }, [])
-  return (
-    <div>
-      <h2 className="clock">{time}</h2>
-    </div>
-  )
+  return <h2 className="clock">{time}</h2>
 }

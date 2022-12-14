@@ -59,9 +59,9 @@ export default function Traiding() {
     return parseFloat(fixRes)
   }
 
-  function handleActivePair(activePair: keyof typeof configuration) {
-    const { min, max } = configuration[activePair]
-    setActivePair(activePair)
+  function handleActivePair(aP: keyof typeof configuration) {
+    const { min, max } = configuration[aP]
+    aP !== activePair && setActivePair(aP)
     setPrice(randomFromInterval(min, max).toFixed(4))
   }
 
