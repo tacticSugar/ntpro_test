@@ -2,9 +2,6 @@ import { configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook } from 'react-redux'
 import { useSelector } from 'react-redux'
 import archiveSlice from './archiveSlice'
-import { getDefaultMiddleware } from '@reduxjs/toolkit'
-
-const customizedMiddleware = getDefaultMiddleware()
 
 export const store = configureStore({
   reducer: {

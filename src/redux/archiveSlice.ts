@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Order } from '../components/Traiding/Traiding'
-import { setToLS } from '../helpers/sessionStorageHelper'
 
 interface ArchiveState {
   orderList: Order[]

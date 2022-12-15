@@ -1,8 +1,6 @@
 import dayjs from 'dayjs'
 import { Link } from 'react-router-dom'
-import { getFromLS } from '../../helpers/sessionStorageHelper'
 import { useAppSelector } from '../../redux/store'
-import { Order } from '../Traiding/Traiding'
 import './Archive.scss'
 
 export default function Archive() {
